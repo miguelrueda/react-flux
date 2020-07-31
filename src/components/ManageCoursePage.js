@@ -1,12 +1,26 @@
-import React from "react";
-import { Prompt } from "react-route-dom";
+import React, { useState } from "react";
+import CourseForm from "./CourseForm";
 
 const ManageCoursePage = props => {
+
+    const [course, setCourse] = useState({
+        id: null,
+        slug: "",
+        title: "",
+        authorId: null,
+        category: ""
+    });
+
+    function handleTitleChange(event) {
+        console.log(event);
+        const updatedCourse = {...course, title: event.target.value};
+        setCourse(updatedCourse);
+    }
+
     return (
         <>
             <h2>Manage Course</h2>
-            <Prompt when={true} message="Are you sure you want to leave?"></Prompt>
-            {props.match.params.slug}
+            <CourseForm course={course} onTitleChange={handleTitleChange} />
         </>
     );
 }
